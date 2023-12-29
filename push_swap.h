@@ -16,5 +16,9 @@ typedef struct s_stack
 int     parse(t_list **stack_a, char **args);
 void    error();
 int		is_sorte(t_list *stack_a);
+void    swap(t_list **stack);
+void	push(t_list **a, t_list **b);
+void	rotate(t_list **stack);
+void	r_rotate(t_list **stack);
 
 #endif

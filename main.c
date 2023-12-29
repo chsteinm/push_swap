@@ -71,9 +71,8 @@ int main(int argc, char **argv)
     stack_a = NULL;
     if (!check_args(args) || !parse(&stack_a, args))
         error();
+    sorte_stack(&stack_a);
     lstprint(stack_a);
-    if (!is_sorte(stack_a))
-        printf("c pas trié");
     ft_lstclear(&stack_a, &free);
     return (0);
 }

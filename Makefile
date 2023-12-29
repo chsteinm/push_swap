@@ -1,7 +1,7 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-SRCS = main.c parse.c
+SRCS = main.c parse.c op.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 SRCS_BONUS =
 OBJ_BONUS = $(SRCS_BONUS:.c=.o)
