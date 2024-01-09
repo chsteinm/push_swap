@@ -54,3 +54,9 @@ void	r_rotate(t_list **stack)
 		first = first->next;
 	first->next = NULL;
 }
+
+void	sa(t_list **a)
+{
+	ft_putstr_fd("sa\n", 1);
+	swap(a);
+}

@@ -53,9 +53,34 @@ void    lstprint(t_list *lst)
     }
 }
 
-int main(int argc, char **argv)
+void	lstsprint(t_list *a, t_list *b, int n)
 {
-    char **args;
+	printf("%dth move :\n\n", n);
+	while (a || b)
+	{
+		if (a && b)
+		{
+			printf("%d   |   %d\n", a->index, b->index);
+			a = a->next;
+			b = b->next;
+		}
+		else if (a)
+		{
+			printf("%d   |\n", a->index);
+			a = a->next;
+		}
+		else if (b)
+		{
+			printf("    |   %d\n", b->index);
+			b = b->next;
+		}
+	}
+	printf("\n\n");
+}
+
+int	main(int argc, char **argv)
+{
+	char **args;
     t_list *stack_a;
     t_list *stack_b;
 	int		size;
@@ -75,8 +100,14 @@ int main(int argc, char **argv)
     if (!check_args(args) || !parse(&stack_a, args))
         error();
 	size = ft_lstsize(stack_a);
-    sorte_stack(&stack_a, &stack_b, size);
-    lstprint(stack_a);
+	int n = 0;
+    while (stack_b || !is_sorte(stack_a))
+	{
+		lstsprint(stack_a, stack_b, n);
+		instruct(&stack_a, &stack_b);
+		n++;
+	}
+	printf("Congrate! Win with %d moves!\n", n);
     ft_lstclear(&stack_a, &free);
     return (0);
 }

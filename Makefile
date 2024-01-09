@@ -1,25 +1,24 @@
 NAME = push_swap
+NAME_BONUS = checker
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-SRCS = main.c parse.c op.c sorte_stack.c
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+SRCS = main.c parse.c op.c op2.c op3.c sorte_stack.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
-SRCS_BONUS =
-OBJ_BONUS = $(SRCS_BONUS:.c=.o)
+SRCS_BONUS = checker.c instruct.c parse.c op.c
+OBJ_BONUS = $(addprefix $(BUILD_DIR)/,$(SRCS_BONUS:.c=.o))
 BUILD_DIR = .build
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -MMD -MP $^ ./libft/libft.a -o $@
+	$(CC) $(CFLAGS) $(OBJ) ./libft/libft.a -o $@
 
-bonus: $(NAME) $(OBJ_BONUS)
-	@if [ "$$(find $(OBJ_BONUS) -newer "$(NAME)" -print -quit)" ]; then \
-		ar rcs $(NAME) $^; \
-	else \
-		echo "make: Nothing to be done for 'bonus'."; \
-	fi
+bonus: all $(NAME_BONUS)
 
-$(BUILD_DIR)/%.o: %.c Makefile libft
+$(NAME_BONUS): $(OBJ_BONUS)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) ./libft/libft.a -o $@
+
+$(BUILD_DIR)/%.o: %.c Makefile
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
@@ -30,11 +29,11 @@ libft:
 
 clean:
 	make -C ./libft clean
-	rm -f *.o *.d
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	make -C ./libft fclean
-	rm -f $(NAME)
+	rm -rf $(NAME) $(NAME_BONUS)
 
 re : fclean
 	make
