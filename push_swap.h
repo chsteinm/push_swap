@@ -8,15 +8,8 @@
 
 # include <stdio.h> //a supprimer
 
-typedef struct s_stack
-{
-	int				value;
-	int				index;
-	struct s_stack	*next;
-}				t_stack;
-
 int     parse(t_list **stack_a, char **args);
-void    error();
+void    error(t_list **stack_a);
 int		is_sorte(t_list *stack_a);
 void    swap(t_list **stack);
 void	sa(t_list **a);
@@ -35,6 +28,7 @@ void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
 void	sorte_stack(t_list **stack_a, t_list **stack_b, int size);
 void	sorte_3(t_list **stack_a);
+void	radix(t_list **stack_a, t_list **stack_b, int size);
 
 
 void	instruct(t_list **stack_a, t_list **stack_b);

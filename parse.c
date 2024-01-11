@@ -39,7 +39,7 @@ void check_double(t_list **lst)
         while (ptr)
         {
             if (*((long *)ptr->content) == *((long *)ptr1->content))
-                return (ft_lstclear(lst, &free), error());
+                error(lst);
             ptr = ptr->next;
         }
         ptr1 = ptr1->next;
@@ -58,11 +58,12 @@ int parse(t_list **stack_a, char **args)
         value = malloc(sizeof(long *));
         new = ft_lstnew(value);
         if (!new || !value)
-            return (free(value), ft_lstclear(stack_a, &free), 0);
+            return (free(value), 0);
         *value = ft_atol(args[i]);
         if (*((long *)value) > 2147483647 || *((long *)value) < -2147483648)
-            return (ft_lstclear(stack_a, &free), 0);
+            return (0);
         new->index = 0;
+		new->index_base = NULL;
         ft_lstadd_back(stack_a, new);
     }
     check_double(stack_a);

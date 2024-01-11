@@ -1,7 +1,8 @@
 #include "push_swap.h"
 
-void    error()
+void    error(t_list **lst)
 {
+	ft_lstclear(lst, &free);
     ft_putstr_fd("Error\n", 2);
     exit(1);
 }
@@ -91,14 +92,14 @@ int	main(int argc, char **argv)
     {
         args = ft_split(argv[1], ' ');
         if (!args)
-            error();
+            error(&stack_a);
     }
     else
         args = argv + 1;
     stack_a = NULL;
     stack_b = NULL;
     if (!check_args(args) || !parse(&stack_a, args))
-        error();
+        error(&stack_a);
 	size = ft_lstsize(stack_a);
 	int n = 0;
     while (stack_b || !is_sorte(stack_a))
