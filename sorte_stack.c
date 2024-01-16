@@ -80,8 +80,14 @@ void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
 		return ;
 	if (size == 2)
 		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
-	if (size < 5)
+	if (size < 61)
 		return (sorte_10(stack_a, stack_b, size));
+	if (size < 101)
+		return (radix(stack_a, stack_b, "01234"));
+	if (size < 250)
+		return (radix(stack_a, stack_b, "0123"));
+	if (size < 500)
+		return (radix(stack_a, stack_b, "012"));
 	else
-		return (radix(stack_a, stack_b, size));
+		return (radix(stack_a, stack_b, "01"));
 }

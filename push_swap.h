@@ -28,7 +28,7 @@ void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
 void	sorte_stack(t_list **stack_a, t_list **stack_b, int size);
 void	sorte_3(t_list **stack_a);
-void	radix(t_list **stack_a, t_list **stack_b, int size);
+void	radix(t_list **stack_a, t_list **stack_b, const char *base);
 
 
 void	instruct(t_list **stack_a, t_list **stack_b);

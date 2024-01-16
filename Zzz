@@ -5,7 +5,7 @@ pour implémenter un radix à base variable :
 - changer boucle while (tmp_size--) par :
 
 - dans ra_or_pb :
-mettre le ifelse dans une boucle
+mettre les 2 conditions dans une boucle
 qui s'arretera lorsqu'elle sera itérée
 lenbase size_a fois.
 dans le if ce sera au lieu de == '1' :
