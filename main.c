@@ -76,7 +76,8 @@ int main(int argc, char **argv)
     if (!check_args(args) || !parse(&stack_a, args))
         error(&stack_a);
 	size = ft_lstsize(stack_a);
-    sorte_stack(&stack_a, &stack_b, size);
+	if (!is_sorte(stack_a))
+    	sorte_stack(&stack_a, &stack_b, size);
     //lstprint(stack_a);
     ft_lstclear(&stack_a, &free);
     return (0);

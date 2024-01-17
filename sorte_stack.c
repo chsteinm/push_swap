@@ -15,7 +15,8 @@ void	sorte_3(t_list **stack_a)
 	}
 	if (ptr->index > ptr->next->next->index)
 		return (ft_putstr_fd("rra\n", 1), r_rotate(stack_a));
-	return (ft_putstr_fd("sa\nra\n", 1), swap(stack_a), rotate(stack_a));
+	if (ptr->next->index > ptr->next->next->index)
+		return (ft_putstr_fd("sa\nra\n", 1), swap(stack_a), rotate(stack_a));
 }
 
 int	find_min_place(t_list *stack)
@@ -56,13 +57,8 @@ void	put_min_on_top(t_list **stack_a, int size_a)
 			rra(stack_a);
 }
 
-void	sorte_10(t_list **stack_a, t_list **stack_b, int size_a)
+void	selec_sorte(t_list **stack_a, t_list **stack_b, int size_a)
 {
-	t_list	*a;
-	t_list	*b;
-
-	a = *stack_a;
-	b = *stack_b;
 	while (size_a > 3)
 	{
 		put_min_on_top(stack_a, size_a);
@@ -76,12 +72,10 @@ void	sorte_10(t_list **stack_a, t_list **stack_b, int size_a)
 
 void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
 {
-	if (!*stack_b && is_sorte(*stack_a))
-		return ;
 	if (size == 2)
 		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
 	if (size < 61)
-		return (sorte_10(stack_a, stack_b, size));
+		return (selec_sorte(stack_a, stack_b, size));
 	if (size < 101)
 		return (radix(stack_a, stack_b, "01234"));
 	if (size < 250)
