@@ -1,25 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/17 16:42:32 by chrstein          #+#    #+#             */
+/*   Updated: 2024/01/17 16:43:45 by chrstein         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    swap(t_list **stack)
+void	swap(t_list **stack)
 {
-    t_list  *one;
-    t_list  *two;
+	t_list	*one;
+	t_list	*two;
 
-    one = *stack;
-    if (!one || !one->next)
-        return ;
-    two = one->next;
-    one->next = two->next;
-    two->next = one;
-    *stack = two;
+	one = *stack;
+	if (!one || !one->next)
+		return ;
+	two = one->next;
+	one->next = two->next;
+	two->next = one;
+	*stack = two;
 }
+
 void	push(t_list **a, t_list **b)
 {
 	t_list	*first;
 
 	first = *b;
 	if (!first)
-		return;
+		return ;
 	*b = first->next;
 	first->next = *a;
 	*a = first;

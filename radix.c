@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/17 16:46:17 by chrstein          #+#    #+#             */
+/*   Updated: 2024/01/17 16:49:06 by chrstein         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	fill_base_and_ret_maxlen(t_list **stack, const char *base)
@@ -29,8 +41,8 @@ void	ra_or_pb(t_list **stack_a, t_list **stack_b, int it, char min_digit)
 	while (size_a--)
 	{
 		a = *stack_a;
-		//printf("%ld, index = %d, base = \"%s\" = %d, it = %d\n", *((long *)a->content), a->index, a->index_base, a->len_index_base, it);
-		if (a->len_index_base - it >= 0 && a->index_base[a->len_index_base - it] != min_digit)
+		if (a->len_index_base - it >= 0
+			&& a->index_base[a->len_index_base - it] != min_digit)
 			ra(stack_a);
 		else
 			pb(stack_a, stack_b);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 17:11:45 by chrstein          #+#    #+#             */
-/*   Updated: 2024/01/17 17:12:43 by chrstein         ###   ########.fr       */
+/*   Created: 2024/01/17 16:35:02 by chrstein          #+#    #+#             */
+/*   Updated: 2024/01/17 16:37:39 by chrstein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,26 @@ int	is_sorte(t_list *stack_a)
 	return (1);
 }
 
+void	lstprint(t_list *lst)
+{
+	while (lst)
+	{
+		printf("%ld, index = %d, base = \"%s\" = %d\n", *((long *)lst->content), lst->index, lst->index_base, lst->len_index_base);
+		lst = lst->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	char	**args;
 	t_list	*stack_a;
 	t_list	*stack_b;
+	int		size;
 
 	if (argc == 1)
 		return (1);
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
@@ -73,12 +85,14 @@ int	main(int argc, char **argv)
 	}
 	else
 		args = argv + 1;
-	stack_a = NULL;
-	stack_b = NULL;
 	if (!check_args(args) || !parse(&stack_a, args))
+	{
 		error(&stack_a);
-	while (stack_b || !is_sorte(stack_a))
-		instruct(&stack_a, &stack_b);
+	}
+	size = ft_lstsize(stack_a);
+	if (!is_sorte(stack_a))
+		sorte_stack(&stack_a, &stack_b, size);
+	//lstprint(stack_a);
 	ft_lstclear(&stack_a, &free);
 	return (0);
 }

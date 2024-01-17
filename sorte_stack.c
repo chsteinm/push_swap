@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorte_stack.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/17 16:52:23 by chrstein          #+#    #+#             */
+/*   Updated: 2024/01/17 16:53:06 by chrstein         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sorte_3(t_list **stack_a)
@@ -21,9 +33,9 @@ void	sorte_3(t_list **stack_a)
 
 int	find_min_place(t_list *stack)
 {
-	int	min;
-	int place;
-	t_list *begin;
+	int		min;
+	int		place;
+	t_list	*begin;
 
 	min = INT_MAX;
 	begin = stack;
@@ -74,13 +86,13 @@ void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	if (size == 2)
 		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
-	if (size < 61)
+	if (size < 71)
 		return (selec_sorte(stack_a, stack_b, size));
-	if (size < 101)
+	if (size < 125)
 		return (radix(stack_a, stack_b, "01234"));
-	if (size < 250)
+	if (size < 169)
 		return (radix(stack_a, stack_b, "0123"));
-	if (size < 500)
+	if (size < 360)
 		return (radix(stack_a, stack_b, "012"));
 	else
 		return (radix(stack_a, stack_b, "01"));
