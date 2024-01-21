@@ -1,12 +1,17 @@
 #include "push_swap.h"
 
-void	instruct(t_list **stack_a, t_list **stack_b)
+void	instruct(t_list **stack_a, t_list **stack_b, int *n)
 {
 	char	ins[4];
 
 	printf("enter instruction :\n");
 	scanf("%s", ins);
 	printf("%s\n", ins);
+	if (*ins == 'u')
+	{
+		*n -= 3;
+		return ;
+	}
 	if (ins[0] == 's')
 	{
 		if (ins[1] == 'a' && !ins[2])
@@ -19,7 +24,7 @@ void	instruct(t_list **stack_a, t_list **stack_b)
 			swap(stack_b);
 		}
 		else
-			return (ft_lstclear(stack_b, &free), error(stack_a));
+			return ;
 	}
 	else if (ins[0] == 'p')
 	{
@@ -28,7 +33,7 @@ void	instruct(t_list **stack_a, t_list **stack_b)
 		else if (ins[1] == 'b' && !ins[2])
 			push(stack_b, stack_a);
 		else
-			return (ft_lstclear(stack_b, &free), error(stack_a));
+			return ;
 	}
 	else if (ins[0] == 'r')
 	{
@@ -53,9 +58,9 @@ void	instruct(t_list **stack_a, t_list **stack_b)
 				r_rotate(stack_b);
 			}
 			else
-				return (ft_lstclear(stack_b, &free), error(stack_a));
+				return ;
 		}
 	}
 	else
-		return (ft_lstclear(stack_b, &free), error(stack_a));
+		return ;
 }

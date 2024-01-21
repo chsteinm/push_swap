@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <limits.h>
 
+#include <stdio.h>
+
 int		parse(t_list **stack_a, char **args);
 void	error(t_list **stack_a);
 int		is_sorte(t_list *stack_a);
@@ -40,11 +42,13 @@ void	rrr(t_list **a, t_list **b);
 void	sorte_stack(t_list **stack_a, t_list **stack_b, int size);
 void	sorte_3(t_list **stack_a);
 void	radix(t_list **stack_a, t_list **stack_b, const char *base);
+void	special_sorte(t_list **stack_a, t_list **stack_b, int size);
+void	fill_price(t_list **stack_a, t_list **stack_b, int size_b);
 
 
 // for bonus :
 
-void	instruct(t_list **stack_a, t_list **stack_b);
+void	instruct(t_list **stack_a, t_list **stack_b, int *n);
 char	*get_next_line(int fd);
 
 #endif

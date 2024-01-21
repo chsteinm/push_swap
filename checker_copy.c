@@ -107,7 +107,7 @@ int	main(int argc, char **argv)
     while (stack_b || !is_sorte(stack_a))
 	{
 		lstsprint(stack_a, stack_b, n);
-		instruct(&stack_a, &stack_b);
+		instruct(&stack_a, &stack_b, &n);
 		n++;
 	}
 	printf("Congrate! Win with %d moves!\n", n);

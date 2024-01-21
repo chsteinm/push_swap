@@ -61,7 +61,8 @@ void	lstprint(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%ld, index = %d, base = \"%s\" = %d\n", *((long *)lst->content), lst->index, lst->index_base, lst->len_index_base);
+		printf("%ld, index = %d\n", *((long *)lst->content), lst->index);
+		// printf("%ld, index = %d, base = \"%s\" = %d\n", *((long *)lst->content), lst->index, lst->index_base, lst->len_index_base);
 		lst = lst->next;
 	}
 }
@@ -92,7 +93,10 @@ int	main(int argc, char **argv)
 	size = ft_lstsize(stack_a);
 	if (!is_sorte(stack_a))
 		sorte_stack(&stack_a, &stack_b, size);
-	//lstprint(stack_a);
+	lstprint(stack_a);
+	printf("\n");
+	lstprint(stack_b);
 	ft_lstclear(&stack_a, &free);
+	ft_lstclear(&stack_b, &free);
 	return (0);
 }
