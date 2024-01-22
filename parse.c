@@ -39,7 +39,7 @@ int	index_elem(t_list **lst)
 	return (1);
 }
 
-void	check_double(t_list **lst)
+int	check_double(t_list **lst)
 {
 	t_list	*ptr1;
 	t_list	*ptr;
@@ -51,13 +51,14 @@ void	check_double(t_list **lst)
 		while (ptr)
 		{
 			if (*((long *)ptr->content) == *((long *)ptr1->content))
-				error(lst);
+				return (0);
 			ptr = ptr->next;
 		}
 		ptr1 = ptr1->next;
 	}
+	return (1);
 }
-
+// gerer cas ou on m'envoi de la merde en argument
 int	parse(t_list **stack_a, char **args)
 {
 	int		i;
@@ -73,7 +74,11 @@ int	parse(t_list **stack_a, char **args)
 			return (free(value), 0);
 		*value = ft_atol(args[i]);
 		if (*((long *)value) > 2147483647 || *((long *)value) < -2147483648)
+		{
+			free(value);
+			free(new);
 			return (0);
+		}
 		new->index = 0;
 		new->index_base = NULL;
 		ft_lstadd_back(stack_a, new);

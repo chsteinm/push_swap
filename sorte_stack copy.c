@@ -20,15 +20,15 @@ void	sorte_3(t_list **stack_a)
 	if (ptr->index > ptr->next->index)
 	{
 		if (ptr->index < ptr->next->next->index)
-			return (ft_putstr_fd("sa\n", 1), swap(stack_a));
+			return (sa(stack_a));
 		if (ptr->next->index < ptr->next->next->index)
-			return (ft_putstr_fd("ra\n", 1), rotate(stack_a));
-		return (ft_putstr_fd("sa\nrra\n", 1), swap(stack_a), r_rotate(stack_a));
+			return (ra(stack_a));
+		return (sa(stack_a), rra(stack_a));
 	}
 	if (ptr->index > ptr->next->next->index)
-		return (ft_putstr_fd("rra\n", 1), r_rotate(stack_a));
+		return (rra(stack_a));
 	if (ptr->next->index > ptr->next->next->index)
-		return (ft_putstr_fd("sa\nra\n", 1), swap(stack_a), rotate(stack_a));
+		return (sa(stack_a), ra(stack_a));
 }
 
 int	find_min_place(t_list *stack)
@@ -85,7 +85,7 @@ void	selec_sorte(t_list **stack_a, t_list **stack_b, int size_a)
 void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	if (size == 2)
-		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
+		return (sa(stack_a));
 	if (size < 71)
 		return (selec_sorte(stack_a, stack_b, size));
 	if (size < 125)

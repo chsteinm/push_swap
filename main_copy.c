@@ -61,7 +61,11 @@ void	lstprint(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%ld, index = %d\n", *((long *)lst->content), lst->index);
+		// if (lst->price == -1)
+		// 	printf("%ld, index = %d\n", *((long *)lst->content), lst->index);
+		// else
+		//	printf("%ld, index = %d, price = %d, n_i_p = %d\n", *((long *)lst->content), lst->index, lst->price, lst->nearest_index_place);
+		printf("%ld, index = %d, price = %d, n_i_p = %d\n", *((long *)lst->content), lst->index, lst->price, lst->nearest_index_place);
 		// printf("%ld, index = %d, base = \"%s\" = %d\n", *((long *)lst->content), lst->index, lst->index_base, lst->len_index_base);
 		lst = lst->next;
 	}
@@ -79,20 +83,18 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 2)
-	{
 		args = ft_split(argv[1], ' ');
-		if (!args)
-			error(&stack_a);
-	}
 	else
-		args = argv + 1;
+		args = strsdup(argv);
+	if (!args || !*args)
+		return (ft_free_strings(args), error(&stack_a), -1);
 	if (!check_args(args) || !parse(&stack_a, args))
-	{
-		error(&stack_a);
-	}
+		return (ft_free_strings(args), error(&stack_a), -1);
+	ft_free_strings(args);
 	size = ft_lstsize(stack_a);
 	if (!is_sorte(stack_a))
 		sorte_stack(&stack_a, &stack_b, size);
+	printf("\n fin = \n");
 	lstprint(stack_a);
 	printf("\n");
 	lstprint(stack_b);

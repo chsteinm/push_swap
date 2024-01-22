@@ -21,6 +21,12 @@
 
 #include <stdio.h>
 
+typedef struct s_strct
+{
+	int		size_a;
+	int		size_b;
+}	t_strct;
+
 int		parse(t_list **stack_a, char **args);
 void	error(t_list **stack_a);
 int		is_sorte(t_list *stack_a);
@@ -44,11 +50,16 @@ void	sorte_3(t_list **stack_a);
 void	radix(t_list **stack_a, t_list **stack_b, const char *base);
 void	special_sorte(t_list **stack_a, t_list **stack_b, int size);
 void	fill_price(t_list **stack_a, t_list **stack_b, int size_b);
+void	put_min_on_top(t_list **stack_a, int size_a);
+void	r_and_p(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
 
 
 // for bonus :
 
 void	instruct(t_list **stack_a, t_list **stack_b, int *n);
 char	*get_next_line(int fd);
+
+// a suppr :
+void	lstprint(t_list *lst);
 
 #endif
