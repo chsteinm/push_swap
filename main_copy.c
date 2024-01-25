@@ -94,10 +94,10 @@ int	main(int argc, char **argv)
 	size = ft_lstsize(stack_a);
 	if (!is_sorte(stack_a))
 		sorte_stack(&stack_a, &stack_b, size);
-	printf("\n fin = \n");
-	lstprint(stack_a);
-	printf("\n");
-	lstprint(stack_b);
+	// printf("\n fin = \n");
+	// lstprint(stack_a);
+	// printf("\n");
+	// lstprint(stack_b);
 	ft_lstclear(&stack_a, &free);
 	ft_lstclear(&stack_b, &free);
 	return (0);

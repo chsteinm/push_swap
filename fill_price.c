@@ -5,7 +5,9 @@ int		find_the_nearest_index(t_list *a, int index_b)
 	int		place_a;
 	int		near;
 	int		i;
-	
+	t_list	*cpy;
+
+	cpy = a;
 	near = INT_MAX;
 	i = 0;
 	place_a = 0;
@@ -19,6 +21,8 @@ int		find_the_nearest_index(t_list *a, int index_b)
 		a = a->next;
 		i++;
 	}
+	if (place_a == 0)
+		return (find_min_place(cpy));
 	return (place_a);
 }
 

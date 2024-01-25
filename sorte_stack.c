@@ -61,25 +61,12 @@ void	put_min_on_top(t_list **stack_a, int size_a)
 
 	a = *stack_a;
 	min_place = find_min_place(a);
-	dprintf(2, "%d min place %d\n", min_place, a->index);
 	if (min_place <= size_a / 2)
-	{
-		dprintf(2, "size_a / 2 = %d  min place %d\n", size_a / 2, min_place);
 		while (min_place--)
-		{
-			dprintf(2, "RA ICI\n");
 			ra(stack_a);
-		}
-	}
 	else
-	{
-		dprintf(2, "RRA ICI\n");
-		dprintf(2, "size %d min %d\n", size_a, min_place);
-		while (size_a >= min_place++)
-		{
+		while (size_a > min_place++)
 			rra(stack_a);
-		}
-	}
 }
 
 void	selec_sorte(t_list **stack_a, t_list **stack_b, int size_a)

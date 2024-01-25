@@ -9,7 +9,7 @@ void	push_b_until_3_in_a(t_list **stack_a, t_list **stack_b, int size_a)
 	size = size_a;
 	while (size_a > 7)
 	{
-		dprintf(2, "index a = %d tier = %d\n", a->index, size * 2 / 3);
+		// dprintf(2, "index a = %d tier = %d\n", a->index, size * 2 / 3);
 		if (a->index > size * 2 / 3)
 			ra(stack_a);
 		else
@@ -47,4 +47,5 @@ void	special_sorte(t_list **stack_a, t_list **stack_b, int size)
 		size_a++;
 		size_b--;
 	}
+	put_min_on_top(stack_a, size);
 }

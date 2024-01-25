@@ -52,6 +52,7 @@ void	special_sorte(t_list **stack_a, t_list **stack_b, int size);
 void	fill_price(t_list **stack_a, t_list **stack_b, int size_b);
 void	put_min_on_top(t_list **stack_a, int size_a);
 void	r_and_p(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
+int		find_min_place(t_list *stack);
 
 
 // for bonus :
