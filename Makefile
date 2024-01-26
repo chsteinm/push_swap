@@ -1,7 +1,7 @@
 NAME = push_swap
 NAME_BONUS = checker
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 SRCS = main_copy.c parse.c op.c op2.c op3.c sorte_stack.c radix.c special_sorte.c fill_price.c r_and_p.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 SRCS_BONUS = checker_copy.c instruct_copy.c parse.c op.c \

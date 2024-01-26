@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
 	else
-		args = strsdup(argv);
+		args = strsdup(argv + 1, argc - 1);
 	if (!args || !*args)
 		return (ft_free_strings(args), error(&stack_a), -1);
 	if (!check_args(args) || !parse(&stack_a, args))

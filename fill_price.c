@@ -13,56 +13,50 @@ int		find_the_nearest_index(t_list *a, int index_b)
 	place_a = 0;
 	while (a)
 	{
-		if (index_b > a->index && near > index_b - a->index)
+		if (index_b < a->index && near > a->index - index_b)
 		{
 			place_a = i;
-			near = index_b - a->index;
+			near = a->index - index_b;
 		}
 		a = a->next;
 		i++;
 	}
-	if (place_a == 0)
-		return (find_min_place(cpy));
+	// if (place_a == 0)
+	// 	return (find_min_place(cpy));
 	return (place_a);
 }
 
-int		a_sup_b(int place_a, int size_a, int place_b, int size_b)
-{
-	if (place_a <= size_a / 2 && place_b <= size_b / 2)
-		return (place_a);
-	if (place_a > size_a / 2 && place_b <= size_b / 2)
-		return (size_a - place_a + 1 + place_b);
-	if (place_a > size_a / 2 && place_b > size_b / 2)
-		return (size_b - place_b + 1);
-	if (place_a <= size_a / 2 && place_b > size_b / 2)
-		return (place_a + size_b - place_b + 1);
-	return (-3);
-}
-
-int		a_inf_b(int place_a, int size_a, int place_b, int size_b)
-{
-	if (place_a <= size_a / 2 && place_b <= size_b / 2)
-		return (place_b);
-	if (place_a > size_a / 2 && place_b <= size_b / 2)
-		return (size_a - place_a + 1 + place_b);
-	if (place_a > size_a / 2 && place_b > size_b / 2)
-		return (size_a - place_a + 1);
-	if (place_a <= size_a / 2 && place_b > size_b / 2)
-		return (place_a + size_b - place_b + 1);
-	return (-11);
-}
 //mettre un else a la place du dernier if (au 2 autres fonctions aussi)
 int		count_moves(t_list *a, t_list *b, int place_b, int size_b)
 {
 	int		size_a;
+	int		count;
 
 	size_a = ft_lstsize(a);
 	b->nearest_index_place = find_the_nearest_index(a, b->index);
-	if (b->nearest_index_place >= place_b)
-		return (a_sup_b(b->nearest_index_place, size_a, place_b, size_b));
-	if (b->nearest_index_place < place_b)
-		return (a_inf_b(b->nearest_index_place, size_a, place_b, size_b));
-	return (-2);
+	if (place_b + 1 <= size_b / 2 && b->nearest_index_place + 1 <= size_a)
+	{
+		if (b->nearest_index_place <= place_b)
+			return (place_b);
+		return (b->nearest_index_place);
+	}
+	if (place_b + 1 > size_b / 2 && b->nearest_index_place + 1 > size_a / 2)
+	{
+		// dprintf(2, "s_b = %d - p_b = %d\n", size_b, place_b);
+		if (size_a - b->nearest_index_place < size_b - place_b)
+			return (size_b - place_b);
+		return (size_a - b->nearest_index_place);
+	}
+	count = 0;
+	if (place_b + 1 <= size_b / 2)
+		count += place_b;
+	else
+		count += size_b - place_b;
+	if (b->nearest_index_place + 1 <= size_a / 2)
+		count += b->nearest_index_place;
+	else
+		count += size_a - b->nearest_index_place;
+	return (count);
 }
 
 void	fill_price(t_list **stack_a, t_list **stack_b, int size_b)

@@ -44,7 +44,7 @@ void	r_down(t_list **stack_a, t_list **stack_b, t_list *to_push, t_strct sizes)
 
 void	r_up_down(t_list **stack_a, t_list **stack_b, t_list *to_push, t_strct sizes)
 {
-	if (to_push->place <= sizes.size_b / 2)
+	if (to_push->place + 1 <= sizes.size_b / 2)
 		while (*stack_b != to_push)
 			rb(stack_b);
 	else
@@ -58,7 +58,7 @@ void	r_up_down(t_list **stack_a, t_list **stack_b, t_list *to_push, t_strct size
 			rra(stack_a);
 
 }
-
+ 
 t_list	*find_to_push(t_list *b)
 {
 	int		min_price;
@@ -93,7 +93,7 @@ void	r_and_p(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
 	to_push = find_to_push(*stack_b);
 	if (to_push->place + 1 <= size_b / 2 && to_push->nearest_index_place + 1 <= size_a / 2)
 		r_up(stack_a, stack_b, to_push);
-	else if (to_push->place > size_b / 2 && to_push->nearest_index_place > size_a / 2)
+	else if (to_push->place + 1 > size_b / 2 && to_push->nearest_index_place + 1 > size_a / 2)
 		r_down(stack_a, stack_b, to_push, sizes);
 	else
 		r_up_down(stack_a, stack_b, to_push, sizes);

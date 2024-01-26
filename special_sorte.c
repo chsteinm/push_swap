@@ -4,13 +4,15 @@ void	push_b_until_3_in_a(t_list **stack_a, t_list **stack_b, int size_a)
 {
 	t_list	*a;
 	int		size;
+	int		o_size;
 
+	o_size = size_a;
 	a = *stack_a;
 	size = size_a;
-	while (size_a > 7)
+	while (size_a > 3)
 	{
 		// dprintf(2, "index a = %d tier = %d\n", a->index, size * 2 / 3);
-		if (a->index > size * 2 / 3)
+		if (a->index > size * 2 / 3 || a->index == o_size)
 			ra(stack_a);
 		else
 		{
@@ -19,11 +21,6 @@ void	push_b_until_3_in_a(t_list **stack_a, t_list **stack_b, int size_a)
 			size++;
 		}
 		a = *stack_a;
-	}
-	while (size_a-- > 3)
-	{
-		put_min_on_top(stack_a, size_a);
-		pb(stack_a, stack_b);
 	}
 }
 
