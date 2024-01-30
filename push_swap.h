@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "./libft/libft.h"
+# include "get_next_line_bonus.h"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -57,7 +58,7 @@ int		find_min_place(t_list *stack);
 
 // for bonus :
 
-void	instruct(t_list **stack_a, t_list **stack_b, int *n);
+void	instruct(t_list **stack_a, t_list **stack_b);
 char	*get_next_line(int fd);
 
 // a suppr :

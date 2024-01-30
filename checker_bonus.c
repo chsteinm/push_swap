@@ -60,25 +60,24 @@ int	is_sorte(t_list *stack_a)
 int	main(int argc, char **argv)
 {
 	char	**args;
+	
 	t_list	*stack_a;
 	t_list	*stack_b;
 
 	if (argc == 1)
 		return (1);
-	if (argc == 2)
-	{
-		args = ft_split(argv[1], ' ');
-		if (!args)
-			error(&stack_a);
-	}
-	else
-		args = argv + 1;
 	stack_a = NULL;
 	stack_b = NULL;
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args = strsdup(argv + 1, argc - 1);
+	if (!args || !*args)
+		return (ft_free_strings(args), error(&stack_a), -1);
 	if (!check_args(args) || !parse(&stack_a, args))
-		error(&stack_a);
-	while (stack_b || !is_sorte(stack_a))
+		return (ft_free_strings(args), error(&stack_a), -1);
+	ft_free_strings(args);
+	while (1)
 		instruct(&stack_a, &stack_b);
-	ft_lstclear(&stack_a, &free);
 	return (0);
 }

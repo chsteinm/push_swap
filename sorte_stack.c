@@ -86,7 +86,7 @@ void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	if (size == 2)
 		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
-	if (size < 6)
+	if (size < 11)
 		return (selec_sorte(stack_a, stack_b, size));
 	if (size < 600)
 		return (special_sorte(stack_a, stack_b, size));
