@@ -83,6 +83,7 @@ int	parse(t_list **stack_a, char **args)
 		new->index_base = NULL;
 		ft_lstadd_back(stack_a, new);
 	}
-	check_double(stack_a);
+	if (!check_double(stack_a))
+		return (0);
 	return (index_elem(stack_a));
 }

@@ -1,10 +1,12 @@
 #include "push_swap.h"
 
-int		find_nb_bigger(t_list *a)
+int		find_nb_bigger(t_list **stack_a)
 {
-	int	index;
-	int	nb_bigger;
+	t_list	*a;
+	int		index;
+	int		nb_bigger;
 
+	a = *stack_a;
 	index = a->index;
 	nb_bigger = 0;
 	while (a)
@@ -18,31 +20,34 @@ int		find_nb_bigger(t_list *a)
 
 void	push_b_until_3_in_a(t_list **stack_a, t_list **stack_b, int size_a)
 {
-	t_list	*a;
 	int		nb_bigger;
+	int		size;
 
-	while (size_a > 9)
+	while (size_a > 10)
 	{
-		a = *stack_a;
-		nb_bigger = find_nb_bigger(a);
-		if (nb_bigger >= size_a * 2 / 3)
+		size = size_a;
+		while (size-- > size_a / 4 + 3)
 		{
-			pb(stack_a, stack_b);
-			size_a--;
-			a = *stack_a;
-			nb_bigger = find_min_place(a);
-			if (nb_bigger < size_a * 2 / 3 && nb_bigger >= size_a / 3)
-				rr(stack_a, stack_b);
+			nb_bigger = find_nb_bigger(stack_a);
+			if (nb_bigger >= size_a * 2 / 3 && size_a > 15)
+			{
+				pb(stack_a, stack_b);
+				size_a--;
+				nb_bigger = find_nb_bigger(stack_a);
+				//dprintf(1, "nb_b = %d --\n", nb_bigger);
+				if (nb_bigger >= size_a / 3)
+					rb(stack_b);
+				else
+					rr(stack_a, stack_b);
+			}
+			else if (nb_bigger >= size_a / 3)
+			{
+				pb(stack_a, stack_b);
+				size_a--;
+			}
 			else
-				rb(stack_b);
+				ra(stack_a);
 		}
-		else if (nb_bigger >= size_a / 3)
-		{
-			pb(stack_a, stack_b);
-			size_a--;
-		}
-		else
-			ra(stack_a);
 	}
 	while (size_a > 3)
 	{
