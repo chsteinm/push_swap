@@ -1,8 +1,7 @@
 #include "push_swap.h"
 
-int		find_the_nearest_index(t_list *a, int index_b)
+void	find_the_nearest_index(t_list *a, t_list *b)
 {
-	int		place_a;
 	int		near;
 	int		i;
 	t_list	*cpy;
@@ -10,20 +9,20 @@ int		find_the_nearest_index(t_list *a, int index_b)
 	cpy = a;
 	near = INT_MAX;
 	i = 0;
-	place_a = 0;
+	b->nearest_index_place = 0;
 	while (a)
 	{
-		if (index_b < a->index && near > a->index - index_b)
+		if (b->index < a->index && near > a->index - b->index)
 		{
-			place_a = i;
-			near = a->index - index_b;
+			b->nearest_index_place = i;
+			near = a->index - b->index;
+			b->near_diff = near;
 		}
 		a = a->next;
 		i++;
 	}
 	// if (place_a == 0)
 	// 	return (find_min_place(cpy));
-	return (place_a);
 }
 
 //mettre un else a la place du dernier if (au 2 autres fonctions aussi)
@@ -33,7 +32,7 @@ int		count_moves(t_list *a, t_list *b, int place_b, int size_b)
 	int		count;
 
 	size_a = ft_lstsize(a);
-	b->nearest_index_place = find_the_nearest_index(a, b->index);
+	find_the_nearest_index(a, b);
 	if (place_b + 1 <= size_b / 2 && b->nearest_index_place + 1 <= size_a)
 	{
 		if (b->nearest_index_place <= place_b)
@@ -68,7 +67,8 @@ void	fill_price(t_list **stack_a, t_list **stack_b, int size_b)
 	ptr = *stack_b;
 	while (ptr)
 	{
-		ptr->price = count_moves(*stack_a, ptr, place, size_b);
+		// ptr->price = count_moves(*stack_a, ptr, place, size_b);
+		ptr->price = count_moves(*stack_a, ptr, place, size_b) + ptr->near_diff + size_b - ptr->index;
 		ptr = ptr->next;
 		place++;
 	}

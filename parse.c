@@ -58,7 +58,24 @@ int	check_double(t_list **lst)
 	}
 	return (1);
 }
-// gerer cas ou on m'envoi de la merde en argument
+
+int	check_overflow(t_list *new, char *arg)
+{
+	int	len;
+
+	len = ft_strlen(arg);
+	if (*((long *)new->content) > INT_MAX || *((long *)new->content) < INT_MIN)
+		return (0);
+	if (*((long *)new->content) == 0)
+		while (--len)
+			if (!(arg[len] == '0' || arg[len] == '-'))
+				return (0);
+	if (*((long *)new->content) == -1)
+		if (*arg != '-' || arg[len - 1] != '1')
+			return (0);
+	return (1);
+}
+
 int	parse(t_list **stack_a, char **args)
 {
 	int		i;
@@ -73,7 +90,7 @@ int	parse(t_list **stack_a, char **args)
 		if (!new || !value)
 			return (free(value), 0);
 		*value = ft_atol(args[i]);
-		if (*((long *)value) > 2147483647 || *((long *)value) < -2147483648)
+		if (!check_overflow(new, args[i]))
 		{
 			free(value);
 			free(new);

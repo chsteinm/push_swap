@@ -6,7 +6,7 @@
 /*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:35:02 by chrstein          #+#    #+#             */
-/*   Updated: 2024/01/17 16:39:32 by chrstein         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:37:39 by chrstein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 2)
-	{
 		args = ft_split(argv[1], ' ');
-		if (!args)
-			error(&stack_a);
-	}
 	else
-		args = argv + 1;
+		args = strsdup(argv + 1, argc - 1);
+	if (!args || !*args)
+		return (ft_free_strings(args), error(&stack_a), -1);
 	if (!check_args(args) || !parse(&stack_a, args))
-		error(&stack_a);
+		return (ft_free_strings(args), error(&stack_a), -1);
+	ft_free_strings(args);
 	size = ft_lstsize(stack_a);
 	if (!is_sorte(stack_a))
 		sorte_stack(&stack_a, &stack_b, size);
 	ft_lstclear(&stack_a, &free);
+	ft_lstclear(&stack_b, &free);
 	return (0);
 }

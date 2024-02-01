@@ -27,6 +27,8 @@ typedef struct s_list
 	int				price;
 	int				place;
 	int				nearest_index_place;
+	int				near_diff;
+	int				nb_bigger;
 }	t_list;
 
 int		ft_isalpha(int c);

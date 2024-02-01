@@ -1,13 +1,11 @@
 #include "push_swap.h"
 
-int		find_nb_bigger(t_list **stack_a)
+int		find_nb_bigger(int index, t_list **stack_a)
 {
 	t_list	*a;
-	int		index;
 	int		nb_bigger;
 
 	a = *stack_a;
-	index = a->index;
 	nb_bigger = 0;
 	while (a)
 	{
@@ -18,33 +16,54 @@ int		find_nb_bigger(t_list **stack_a)
 	return (nb_bigger);
 }
 
+void	fill_nb_bigger(t_list **stack_a)
+{
+	t_list	*a;
+
+	a = *stack_a;
+	while (a)
+	{
+		a->nb_bigger = find_nb_bigger(a->index, stack_a);
+		a = a->next;
+	}
+}
+
 void	push_b_until_3_in_a(t_list **stack_a, t_list **stack_b, int size_a)
 {
-	int		nb_bigger;
+	t_list	*a;
 	int		size;
+	int		size_cpy;
 
 	while (size_a > 10)
 	{
 		size = size_a;
-		while (size-- > size_a / 4 + 3)
+		size_cpy = size_a;
+		fill_nb_bigger(stack_a);
+		while (size-- > 4)
 		{
-			nb_bigger = find_nb_bigger(stack_a);
-			if (nb_bigger >= size_a * 2 / 3 && size_a > 15)
+			a = *stack_a;
+			// if (a->nb_bigger >= size_cpy / 2)
+			if (a->nb_bigger >= size_a * 2 / 3)
 			{
 				pb(stack_a, stack_b);
 				size_a--;
-				nb_bigger = find_nb_bigger(stack_a);
-				//dprintf(1, "nb_b = %d --\n", nb_bigger);
-				if (nb_bigger >= size_a / 3)
-					rb(stack_b);
-				else
-					rr(stack_a, stack_b);
+				// dprintf(1, "nb_bigger = %d .. 3/4 = %d\n", nb_bigger, size_cpy - size_cpy / 4);
+				// if (a->nb_bigger >= size_cpy - size_cpy / 4)
+				if (a->nb_bigger > size_a * 2 / 3 + size_a / 3 / 2)
+				{
+					//dprintf(1, "nb_b = %d --\n", nb_bigger);
+					a = *stack_a;
+					if (a->nb_bigger >= size_cpy / 3)
+						rb(stack_b);
+					else
+						rr(stack_a, stack_b);
+				}
 			}
-			else if (nb_bigger >= size_a / 3)
-			{
-				pb(stack_a, stack_b);
-				size_a--;
-			}
+			// else if (size_a < 50 && nb_bigger >= size_a / 3)
+			// {
+			// 	pb(stack_a, stack_b);
+			// 	size_a--;
+			// }
 			else
 				ra(stack_a);
 		}
