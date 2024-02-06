@@ -20,7 +20,7 @@ void	instruct_r(t_list **stack_a, t_list **stack_b, char *ins)
 		rotate(stack_b);
 	else if (ins[1] == 'r')
 	{
-		if (ins[2] == '\0')
+		if (ins[2] == '\n')
 		{
 			rotate(stack_a);
 			rotate(stack_b);

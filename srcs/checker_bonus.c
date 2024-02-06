@@ -57,6 +57,16 @@ int	is_sorte(t_list *stack_a)
 	return (1);
 }
 
+void	replace_white_space(char *argv)
+{
+	while (*argv)
+	{
+		if (ft_iswhitespace(*argv))
+			*argv = ' ';
+		argv++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	char	**args;
@@ -68,7 +78,10 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 2)
+	{
+		replace_white_space(argv[1]);
 		args = ft_split(argv[1], ' ');
+	}
 	else
 		args = strsdup(argv + 1, argc - 1);
 	if (!args || !*args)

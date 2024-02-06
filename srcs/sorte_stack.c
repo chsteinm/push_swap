@@ -82,13 +82,16 @@ void	selec_sorte(t_list **stack_a, t_list **stack_b, int size_a)
 		pa(stack_a, stack_b);
 }
 
-void	sorte_stack(t_list **stack_a, t_list **stack_b, int size)
+void	sorte_stack(t_list **stack_a, t_list **stack_b)
 {
+	int	size;
+
+	size = ft_lstsize(*stack_a);
 	if (size == 2)
 		return (ft_putstr_fd("sa\n", 1), swap(stack_a));
 	if (size < 11)
 		return (selec_sorte(stack_a, stack_b, size));
-	if (size < 2000)
+	if (size < 1000)
 		return (special_sorte(stack_a, stack_b, size));
 	else
 		return (radix(stack_a, stack_b, "01"));

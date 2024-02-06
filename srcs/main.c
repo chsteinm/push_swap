@@ -57,19 +57,31 @@ int	is_sorte(t_list *stack_a)
 	return (1);
 }
 
+void	replace_white_space(char *argv)
+{
+	while (*argv)
+	{
+		if (ft_iswhitespace(*argv))
+			*argv = ' ';
+		argv++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	char	**args;
 	t_list	*stack_a;
 	t_list	*stack_b;
-	int		size;
 
 	if (argc == 1)
-		return (1);
+		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 2)
+	{
+		replace_white_space(argv[1]);
 		args = ft_split(argv[1], ' ');
+	}
 	else
 		args = strsdup(argv + 1, argc - 1);
 	if (!args || !*args)
@@ -77,9 +89,8 @@ int	main(int argc, char **argv)
 	if (!check_args(args) || !parse(&stack_a, args))
 		return (ft_free_strings(args), error(&stack_a), -1);
 	ft_free_strings(args);
-	size = ft_lstsize(stack_a);
 	if (!is_sorte(stack_a))
-		sorte_stack(&stack_a, &stack_b, size);
+		sorte_stack(&stack_a, &stack_b);
 	ft_lstclear(&stack_a, &free);
 	ft_lstclear(&stack_b, &free);
 	return (0);

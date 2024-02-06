@@ -44,7 +44,7 @@ void	r_rotate(t_list **stack);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
-void	sorte_stack(t_list **stack_a, t_list **stack_b, int size);
+void	sorte_stack(t_list **stack_a, t_list **stack_b);
 void	sorte_3(t_list **stack_a);
 void	radix(t_list **stack_a, t_list **stack_b, const char *base);
 void	special_sorte(t_list **stack_a, t_list **stack_b, int size);
@@ -52,6 +52,7 @@ void	fill_price(t_list **stack_a, t_list **stack_b, t_strct sizes);
 void	put_min_on_top(t_list **stack_a, int size_a);
 void	r_and_p(t_list **stack_a, t_list **stack_b, t_strct sizes);
 int		find_min_place(t_list *stack);
+void	replace_white_space(char *argv);
 
 // for bonus :
 void	instruct(t_list **stack_a, t_list **stack_b);

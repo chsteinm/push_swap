@@ -88,7 +88,7 @@ int	parse(t_list **stack_a, char **args)
 		value = malloc(sizeof(long *));
 		new = ft_lstnew(value);
 		if (!new || !value)
-			return (free(value), 0);
+			return (free(value), free(new), 0);
 		*value = ft_atol(args[i]);
 		if (!check_overflow(new, args[i]))
 		{
