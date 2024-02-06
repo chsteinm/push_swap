@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruct_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/06 17:18:53 by chrstein          #+#    #+#             */
+/*   Updated: 2024/02/06 17:19:01 by chrstein         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	instruct_r(t_list **stack_a, t_list **stack_b, char *ins)
@@ -30,26 +42,26 @@ void	instruct_r(t_list **stack_a, t_list **stack_b, char *ins)
 void	instruct_p(t_list **stack_a, t_list **stack_b, char *ins)
 {
 	if (ins[1] == 'a' && ins[2] == '\n')
-			push(stack_a, stack_b);
-		else if (ins[1] == 'b' && ins[2] == '\n')
-			push(stack_b, stack_a);
-		else
-			return (free(ins), ft_lstclear(stack_b, &free), error(stack_a));
+		push(stack_a, stack_b);
+	else if (ins[1] == 'b' && ins[2] == '\n')
+		push(stack_b, stack_a);
+	else
+		return (free(ins), ft_lstclear(stack_b, &free), error(stack_a));
 }
 
 void	instruct_s(t_list **stack_a, t_list **stack_b, char *ins)
 {
 	if (ins[1] == 'a' && ins[2] == '\n')
-			swap(stack_a);
-		else if (ins[1] == 'b' && ins[2] == '\n')
-			swap(stack_b);
-		else if (ins[1] == 's' && ins[2] == '\n')
-		{
-			swap(stack_a);
-			swap(stack_b);
-		}
-		else
-			return (free(ins), ft_lstclear(stack_b, &free), error(stack_a));
+		swap(stack_a);
+	else if (ins[1] == 'b' && ins[2] == '\n')
+		swap(stack_b);
+	else if (ins[1] == 's' && ins[2] == '\n')
+	{
+		swap(stack_a);
+		swap(stack_b);
+	}
+	else
+		return (free(ins), ft_lstclear(stack_b, &free), error(stack_a));
 }
 
 void	end(t_list **stack_a, t_list **stack_b)

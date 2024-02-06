@@ -6,7 +6,7 @@
 /*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:05:40 by chrstein          #+#    #+#             */
-/*   Updated: 2024/01/17 18:06:23 by chrstein         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:23:44 by chrstein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-
-#include <stdio.h>
 
 typedef struct s_strct
 {
@@ -50,18 +48,13 @@ void	sorte_stack(t_list **stack_a, t_list **stack_b, int size);
 void	sorte_3(t_list **stack_a);
 void	radix(t_list **stack_a, t_list **stack_b, const char *base);
 void	special_sorte(t_list **stack_a, t_list **stack_b, int size);
-void	fill_price(t_list **stack_a, t_list **stack_b, int size_b);
+void	fill_price(t_list **stack_a, t_list **stack_b, t_strct sizes);
 void	put_min_on_top(t_list **stack_a, int size_a);
-void	r_and_p(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
+void	r_and_p(t_list **stack_a, t_list **stack_b, t_strct sizes);
 int		find_min_place(t_list *stack);
 
-
 // for bonus :
-
 void	instruct(t_list **stack_a, t_list **stack_b);
 char	*get_next_line(int fd);
-
-// a suppr :
-void	lstprint(t_list *lst);
 
 #endif

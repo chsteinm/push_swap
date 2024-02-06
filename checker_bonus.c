@@ -60,7 +60,6 @@ int	is_sorte(t_list *stack_a)
 int	main(int argc, char **argv)
 {
 	char	**args;
-	
 	t_list	*stack_a;
 	t_list	*stack_b;
 

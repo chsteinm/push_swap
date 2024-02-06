@@ -1,64 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   r_and_p.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/06 17:03:55 by chrstein          #+#    #+#             */
+/*   Updated: 2024/02/06 17:03:56 by chrstein         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	r_up(t_list **stack_a, t_list **stack_b, t_list *to_push)
+void	r_up(t_list **s_a, t_list **s_b, t_list *to_push)
 {
 	if (to_push->nearest_index_place <= to_push->place)
 	{
 		while (to_push->nearest_index_place)
 		{
 			to_push->nearest_index_place--;
-			rr(stack_a, stack_b);
+			rr(s_a, s_b);
 		}
-		while (*stack_b != to_push)
-			rb(stack_b);
+		while (*s_b != to_push)
+			rb(s_b);
 	}
 	else
 	{
-		while (*stack_b != to_push && to_push->nearest_index_place--)
-			rr(stack_a, stack_b);
+		while (*s_b != to_push && to_push->nearest_index_place--)
+			rr(s_a, s_b);
 		while (to_push->nearest_index_place)
 		{
 			to_push->nearest_index_place--;
-			ra(stack_a);
+			ra(s_a);
 		}
 	}
 }
 
-void	r_down(t_list **stack_a, t_list **stack_b, t_list *to_push, t_strct sizes)
+void	r_down(t_list **s_a, t_list **s_b, t_list *to_push, t_strct sizes)
 {
-	if (sizes.size_a - to_push->nearest_index_place < sizes.size_b - to_push->place)
+	if (sizes.size_a - to_push->nearest_index_place < \
+	sizes.size_b - to_push->place)
 	{
 		while (++to_push->nearest_index_place != sizes.size_a + 1)
-			rrr(stack_a, stack_b);
-		while (*stack_b != to_push)
-			rrb(stack_b);
+			rrr(s_a, s_b);
+		while (*s_b != to_push)
+			rrb(s_b);
 	}
 	else
 	{
-		while (*stack_b != to_push && to_push->nearest_index_place++)
-			rrr(stack_a, stack_b);
+		while (*s_b != to_push && to_push->nearest_index_place++)
+			rrr(s_a, s_b);
 		while (++to_push->nearest_index_place != sizes.size_a + 1)
-			rra(stack_a);
+			rra(s_a);
 	}
 }
 
-void	r_up_down(t_list **stack_a, t_list **stack_b, t_list *to_push, t_strct sizes)
+void	r_up_down(t_list **s_a, t_list **s_b, t_list *to_push, t_strct sizes)
 {
 	if (to_push->place + 1 <= sizes.size_b / 2)
-		while (*stack_b != to_push)
-			rb(stack_b);
+		while (*s_b != to_push)
+			rb(s_b);
 	else
-		while (*stack_b != to_push)
-			rrb(stack_b);
+		while (*s_b != to_push)
+			rrb(s_b);
 	if (to_push->nearest_index_place + 1 <= sizes.size_a / 2)
 		while (to_push->nearest_index_place--)
-			ra(stack_a);
+			ra(s_a);
 	else
 		while (++to_push->nearest_index_place != sizes.size_a + 1)
-			rra(stack_a);
-
+			rra(s_a);
 }
- 
+
 t_list	*find_to_push(t_list *b)
 {
 	int		min_price;
@@ -81,25 +93,24 @@ t_list	*find_to_push(t_list *b)
 	return (to_push);
 }
 
-void	r_and_p(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
+void	r_and_p(t_list **s_a, t_list **s_b, t_strct sizes)
 {
 	t_list	*to_push;
 	t_list	*a;
 	t_list	*b;
-	t_strct	sizes;
 
-	sizes.size_a = size_a;
-	sizes.size_b = size_b;
-	to_push = find_to_push(*stack_b);
-	if (to_push->place + 1 <= size_b / 2 && to_push->nearest_index_place + 1 <= size_a / 2)
-		r_up(stack_a, stack_b, to_push);
-	else if (to_push->place + 1 > size_b / 2 && to_push->nearest_index_place + 1 > size_a / 2)
-		r_down(stack_a, stack_b, to_push, sizes);
+	to_push = find_to_push(*s_b);
+	if (to_push->place + 1 <= sizes.size_b / 2 && \
+	to_push->nearest_index_place + 1 <= sizes.size_a / 2)
+		r_up(s_a, s_b, to_push);
+	else if (to_push->place + 1 > sizes.size_b / 2 && \
+	to_push->nearest_index_place + 1 > sizes.size_a / 2)
+		r_down(s_a, s_b, to_push, sizes);
 	else
-		r_up_down(stack_a, stack_b, to_push, sizes);
-	a = *stack_a;
-	b = *stack_b;
+		r_up_down(s_a, s_b, to_push, sizes);
+	a = *s_a;
+	b = *s_b;
 	if (a->index < b->index)
-		ra(stack_a);
-	pa(stack_a, stack_b);
+		ra(s_a);
+	pa(s_a, s_b);
 }
